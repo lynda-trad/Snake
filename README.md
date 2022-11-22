@@ -1,6 +1,6 @@
 # ~ Snake ~
 
-* This is my rendition of the class Snake game.
+* This is my rendition of the classic Snake game.
 
 * You control a snake with your keyboard arrows.
 
@@ -8,10 +8,12 @@
 
 * Everytime you eat a fruit, the snake gets longer.
 
-* Be careful not to touch the snake body with its head or else you lose !
-
-Enjoy !
+* You will lose if :
+  - the snake's head touches its body,
+  - the snake goes out of bounds.
 ___
+Enjoy !
+
       {00}
       \__/
       /^/
