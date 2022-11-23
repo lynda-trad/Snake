@@ -72,7 +72,6 @@ def check_collisions_snake(snake_head_, snake_body_rect_):
     if pygame.Rect.collidelist(snake_head_, snake_body_rect_) != -1:
         return True
     else:
-        print(pygame.Rect.collidelist(snake_head_, snake_body_rect_))
         return False
 
 
@@ -89,7 +88,7 @@ snake_head, snake_body_rect, fruit_rect = update_surface(surface, snake, fruit)
 
 # Launch game
 MOVEEVENT = pygame.USEREVENT + 1
-pygame.time.set_timer(MOVEEVENT, 400)
+pygame.time.set_timer(MOVEEVENT, 300)
 while not snake.lost:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_UP]: snake.update_direction("up")
@@ -107,5 +106,4 @@ while not snake.lost:
             snake.update_body()
             snake_head, snake_body_rect, fruit_rect = update_surface(surface, snake, fruit)
             pygame.display.flip()
-
 print("You lost!")
