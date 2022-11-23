@@ -43,13 +43,13 @@ fruit = Fruit()
 
 # Launch game
 MOVEEVENT = pygame.USEREVENT+1
-pygame.time.set_timer(MOVEEVENT, 400)
+pygame.time.set_timer(MOVEEVENT, 500)
 while not snake.lost:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_UP]: snake.update_direction("up")
-    if keys[pygame.K_UP]: snake.update_direction("down")
+    if keys[pygame.K_DOWN]: snake.update_direction("down")
     if keys[pygame.K_LEFT]: snake.update_direction("left")
-    if keys[pygame.K_RIGHT]: snake.update_direction("right")
+    if keys[pygame.K_d]: snake.update_direction("right")
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT: snake.lost = True

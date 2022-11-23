@@ -21,6 +21,9 @@ class Snake:
         """
         self.direction = dir
 
+    def longer(self):
+        self.body.append(self.body[-1])
+
     def update_body(self):
         """
         Depending on the snake direction, the body will be updated.
@@ -50,7 +53,7 @@ class Snake:
             self.body[0] = (x_head, y_head + SIZE)
 
         # Snake is out of bounds
-        if -1 in self.get_head_coordinates() or 400 in self.get_head_coordinates():
+        if -20 in self.get_head_coordinates() or 400 in self.get_head_coordinates():
             self.lost = True
 
     def check_collisions(self, fruit):
@@ -62,6 +65,7 @@ class Snake:
         snake_X = self.get_head_coordinates()[0]
         snake_Y = self.get_head_coordinates()[1]
         if snake_X == fruit.x_fruit or snake_Y == fruit.y_fruit:
+            self.longer()
             return True
         else:
             return False
