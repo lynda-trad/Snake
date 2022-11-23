@@ -9,12 +9,12 @@ SIZE = width, height = 400, 400
 
 class Fruit:
     def __init__(self):
-        self.x_fruit = random.randint(1, 400)
-        self.y_fruit = random.randint(1, 400)
+        self.x_fruit = random.randint(1, 380)
+        self.y_fruit = random.randint(1, 380)
 
     def reset(self):
-        self.x_fruit = random.randint(1, 400)
-        self.y_fruit = random.randint(1, 400)
+        self.x_fruit = random.randint(1, 380)
+        self.y_fruit = random.randint(1, 380)
 
 
 def update_surface(screen, snake, fruit):
@@ -28,7 +28,7 @@ def update_surface(screen, snake, fruit):
     for body in snake.body:
         pygame.draw.rect(screen, GREEN, pygame.Rect(body[0], body[1], 20, 20))
 
-    pygame.draw.circle(surface, RED, (fruit.x_fruit, fruit.y_fruit), 10)
+    pygame.draw.circle(surface, RED, (fruit.x_fruit, fruit.y_fruit), 15)
 
 
 # Window init
@@ -49,7 +49,7 @@ while not snake.lost:
     if keys[pygame.K_UP]: snake.update_direction("up")
     if keys[pygame.K_DOWN]: snake.update_direction("down")
     if keys[pygame.K_LEFT]: snake.update_direction("left")
-    if keys[pygame.K_d]: snake.update_direction("right")
+    if keys[pygame.K_RIGHT]: snake.update_direction("right")
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT: snake.lost = True
