@@ -88,7 +88,7 @@ snake_head, snake_body_rect, fruit_rect = update_surface(surface, snake, fruit)
 
 # Launch game
 MOVEEVENT = pygame.USEREVENT + 1
-pygame.time.set_timer(MOVEEVENT, 300)
+pygame.time.set_timer(MOVEEVENT, 100)
 while not snake.lost:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_UP]: snake.update_direction("up")
@@ -106,4 +106,7 @@ while not snake.lost:
             snake.update_body()
             snake_head, snake_body_rect, fruit_rect = update_surface(surface, snake, fruit)
             pygame.display.flip()
-print("You lost!")
+if len(snake.body) == 361:
+    print("Congratulations, you won!")
+else:
+    print("Too bad, you lost! Your snake was", len(snake.body), "blocks long!")
