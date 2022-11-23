@@ -29,34 +29,35 @@ class Fruit:
         self.y_fruit += 10
 
 
-def update_surface(screen, snake, fruit):
+def update_surface(screen, snake_, fruit_):
     """
     Updates the screen everytime the snake moves.
     :param screen:
-    :param snake:
+    :param snake_:
+    :param fruit_:
     :return:
     """
     snake_body_rect_ = []
     screen.fill((0, 0, 0, 0))
 
     # fruit_rect_ = pygame.draw.rect(screen, RED, pygame.Rect(fruit.x_fruit, fruit.y_fruit, 20, 20))
-    fruit_rect_ = pygame.draw.circle(surface, RED, (fruit.x_fruit, fruit.y_fruit), 15)
+    fruit_rect_ = pygame.draw.circle(surface, RED, (fruit_.x_fruit, fruit_.y_fruit), 15)
 
-    for body in snake.body:
+    for body in snake_.body:
         snake_body_rect_.append(pygame.draw.rect(screen, GREEN, pygame.Rect(body[0], body[1], 20, 20)))
     snake_head_ = snake_body_rect_[0]
     snake_body_rect_.pop(0)
     return snake_head_, snake_body_rect_, fruit_rect_
 
 
-def check_collisions_fruit(snake_head_, fruit_rect_):
+def check_collisions_fruit(snake_head_, fruit_):
     """
     Returns true if the snake head is touching the fruit.
     :param snake_head_:
-    :param fruit_rect_:
+    :param fruit_:
     :return:
     """
-    if pygame.Rect.colliderect(snake_head_, fruit_rect_):
+    if pygame.Rect.collidepoint(snake_head_, fruit_.x_fruit, fruit_.y_fruit):
         return True
     else:
         return False
@@ -88,7 +89,7 @@ snake_head, snake_body_rect, fruit_rect = update_surface(surface, snake, fruit)
 
 # Launch game
 MOVEEVENT = pygame.USEREVENT + 1
-pygame.time.set_timer(MOVEEVENT, 100)
+pygame.time.set_timer(MOVEEVENT, 150)
 while not snake.lost:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_UP]: snake.update_direction("up")
@@ -100,7 +101,7 @@ while not snake.lost:
         if event.type == pygame.QUIT or check_collisions_snake(snake_head, snake_body_rect):
             snake.lost = True
         if event.type == MOVEEVENT:
-            if check_collisions_fruit(snake_head, fruit_rect):
+            if check_collisions_fruit(snake_head, fruit):
                 fruit.reset()
                 snake.longer()
             snake.update_body()
