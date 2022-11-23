@@ -1,7 +1,7 @@
 class Snake:
     def __init__(self):
-        self.x_init = 100
-        self.y_init = 100
+        self.x_init = 120
+        self.y_init = 120
         self.body = [(self.x_init, self.y_init)]
         self.direction = "right"
         self.lost = False
@@ -22,6 +22,10 @@ class Snake:
         self.direction = dir
 
     def longer(self):
+        """
+        When the snake eats a fruit, it gets longer.
+        :return:
+        """
         self.body.append(self.body[-1])
 
     def update_body(self):
@@ -55,17 +59,3 @@ class Snake:
         # Snake is out of bounds
         if -20 in self.get_head_coordinates() or 400 in self.get_head_coordinates():
             self.lost = True
-
-    def check_collisions(self, fruit):
-        """
-        Returns true if snake collides fruit, false if not.
-        :param fruit:
-        :return: boolean
-        """
-        snake_X = self.get_head_coordinates()[0]
-        snake_Y = self.get_head_coordinates()[1]
-        if snake_X == fruit.x_fruit or snake_Y == fruit.y_fruit:
-            self.longer()
-            return True
-        else:
-            return False
