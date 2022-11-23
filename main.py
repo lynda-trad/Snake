@@ -42,28 +42,22 @@ snake = snake.Snake()
 fruit = Fruit()
 
 # Launch game
-clock = pygame.time.Clock()
-time_elapsed_since_last_action = 0
+MOVEEVENT = pygame.USEREVENT+1
+pygame.time.set_timer(MOVEEVENT, 400)
 while not snake.lost:
-    dt = clock.tick()
-    time_elapsed_since_last_action += dt
-    if time_elapsed_since_last_action > 50:
-        for event in pygame.event.get():
-            snake.update_body()
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_UP]: snake.update_direction("up")
+    if keys[pygame.K_UP]: snake.update_direction("down")
+    if keys[pygame.K_LEFT]: snake.update_direction("left")
+    if keys[pygame.K_RIGHT]: snake.update_direction("right")
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: snake.lost = True
+        if event.type == MOVEEVENT:
             if snake.check_collisions(fruit):
                 fruit.reset()
+            snake.update_body()
             update_surface(surface, snake, fruit)
             pygame.display.flip()
-            if event.type == pygame.QUIT:
-                snake.lost = True
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    snake.update_direction("up")
-                if event.key == pygame.K_DOWN:
-                    snake.update_direction("down")
-                if event.key == pygame.K_LEFT:
-                    snake.update_direction("left")
-                if event.key == pygame.K_RIGHT:
-                    snake.update_direction("right")
 
 print("You lost!")
