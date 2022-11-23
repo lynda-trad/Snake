@@ -50,7 +50,7 @@ class Snake:
 
         if self.direction == "right":
             x_head, y_head = self.get_head_coordinates()
-            self.body[0] = (x_head, y_head + SIZE)
+            self.body[0] = (x_head + SIZE, y_head)
 
         # Snake is out of bounds
         if -20 in self.get_head_coordinates() or 400 in self.get_head_coordinates():
