@@ -15,11 +15,33 @@ class Snake:
 
     def update_direction(self, dir):
         """
-        Updates snake direction when arrow is pressed
+        Updates the snake direction when an arrow is pressed.
+        If the new direction is opposite to the current direction,
+        the function checks if the snake length is 1.
+        If so, the snake can turn around.
+        If not, the direction doesn't change.
         :param direction:
         :return:
         """
-        self.direction = dir
+        if self.direction == 'up' and dir == 'down':
+            if len(self.body) == 1:
+                self.direction = dir
+            return
+        elif self.direction == 'down' and dir == 'up':
+            if len(self.body) == 1:
+                self.direction = dir
+            return
+        elif self.direction == 'left' and dir == 'right':
+            if len(self.body) == 1:
+                self.direction = dir
+            return
+        elif self.direction == 'right' and dir == 'left':
+            if len(self.body) == 1:
+                self.direction = dir
+            return
+        else:
+            self.direction = dir
+            return
 
     def longer(self):
         """
@@ -43,7 +65,6 @@ class Snake:
         if self.direction == "up":
             x_head, y_head = self.get_head_coordinates()
             self.body[0] = (x_head, y_head - SIZE)
-
         if self.direction == "down":
             x_head, y_head = self.get_head_coordinates()
             self.body[0] = (x_head, y_head + SIZE)
